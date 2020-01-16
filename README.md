@@ -16,8 +16,8 @@ Arch Linux虚拟机安装脚本，使用前请务必阅读本部分，同时最�
 # 下载脚本文件
 wget https://gitee.com/techstay/myscripts/raw/master/archinstall/install.sh
 
-# 自动完成所有配置
-bash install.sh yourusername yourpasswd
+# 自动完成所有配置，密码需要输入两次
+bash install.sh yourusername yourpasswd yourpasswd
 
 # 无参数脚本，只完成一部分安装工作，剩下的请手动下载编辑运行configure.sh
 bash install.sh
@@ -25,7 +25,7 @@ bash install.sh
 wget https://gitee.com/techstay/myscripts/raw/master/archinstall/configure.sh
 
 cp configure.sh /mnt/opt/
-arch-chroot /mnt /opt/configure.sh yourusrname yourpasswd
+arch-chroot /mnt /opt/configure.sh yourusrname yourpasswd yourpasswd
 ```
 
 **`install.sh`脚本会下载并运行`configure.sh`，如果希望在运行之前进行设置，请调用无参的`install.sh`，并手动下载编辑运行`configure.sh`。**

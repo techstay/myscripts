@@ -8,9 +8,9 @@ function set_user() {
     echo -e "$password\n$password" | passwd
 
     # 创建新用户并添加sudo权限
-    useradd -g wheel -m $username
+    useradd -g wheel -m "$username"
     sed -i "s/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g" /etc/sudoers
-    echo -e "$password\n$password" | passwd $username
+    echo -e "$password\n$password" | passwd "$username"
 }
 
 function set_locale() {
@@ -40,6 +40,7 @@ function set_network() {
 127.0.0.1   localhost
 ::1	    localhost
 127.0.1.1   $username-pc.localdomain $username-pc
+
 EOL
 
     # 启动网络服务
@@ -76,8 +77,8 @@ function set_other() {
     systemctl enable sshd
 }
 
-if [ $# = 2 ]; then
-    set_user $1 $2
+if [ $# = 3 ] && [ "$2" -eq "$3" ]; then
+    set_user "$1" "$2"
     set_locale
     set_network
     set_bootloader

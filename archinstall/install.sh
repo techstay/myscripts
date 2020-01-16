@@ -28,13 +28,13 @@ function install_base() {
 
     # 安装基本系统和一些必备软件
     pacstrap /mnt base linux linux-firmware base-devel \
-    btrfs-progs \
-    networkmanager \
-    nano vim \
-    man-db man-pages texinfo \
-    grub efibootmgr \
-    amd-ucode intel-ucode \
-    openssh gparted
+        btrfs-progs \
+        networkmanager \
+        nano vim \
+        man-db man-pages texinfo \
+        grub efibootmgr \
+        amd-ucode intel-ucode \
+        openssh gparted
 }
 
 function gen_fstab() {
@@ -56,12 +56,12 @@ function move_script_to_chroot() {
 
 function post_config() {
     # 进入chroot环境继续配置
-    # 两个参数分别是用户名和密码
-    arch-chroot /mnt $CHROOT_SCRIPT_PATH $1 $2
+    # 三个参数分别是用户名、密码和确认密码
+    arch-chroot /mnt $CHROOT_SCRIPT_PATH "$1" "$2" "$3"
     if [ $? ]; then
         rm /mnt$CHROOT_SCRIPT_PATH
-        read -p "安装成功，是否重启虚拟机？(y/n):" prompt
-        if [ $prompt = 'y' ] || [ $prompt = 'Y' ]; then
+        read -rp "安装成功，是否重启虚拟机(successful installation, reboot now)？(y/n):" prompt
+        if [ "$prompt" = 'y' ] || [ "$prompt" = 'Y' ]; then
             reboot now
         fi
     else
@@ -69,8 +69,13 @@ function post_config() {
     fi
 }
 
-if [ $# -ne 2 ] && [ $# -ne 0 ]; then
+if [ $# -ne 3 ] && [ $# -ne 0 ]; then
     echo "参数不正确，请输入正确的参数"
+    exit 1
+fi
+
+if [ $# -eq 3 ] && [ "$3" -ne "$2" ]; then
+    echo "两次输入密码不一致，请重新输入"
     exit 1
 fi
 
@@ -78,8 +83,8 @@ partition
 mounting
 install_base
 gen_fstab
-move_script_to_chroot
 
-if [ $# -eq 2 ]; then
-    post_config "$1" "$2"
+if [ $# -eq 3 ]; then
+    move_script_to_chroot
+    post_config "$1" "$2" "$3"
 fi
