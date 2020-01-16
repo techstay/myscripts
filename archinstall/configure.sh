@@ -85,6 +85,6 @@ if [ $# = 3 ] && [ "$2" -eq "$3" ]; then
     set_pacman
     set_other
 else
-    echo "参数错误，脚本停止"
+    echo "参数错误，脚本停止(wrong argument, script stopped)"
     exit 1
 fi

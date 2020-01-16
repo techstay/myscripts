@@ -65,17 +65,17 @@ function post_config() {
             reboot now
         fi
     else
-        echo "安装失败，请手动安装Arch Linux"
+        echo "安装失败，请手动安装Arch Linux(installation failed, please install manually)"
     fi
 }
 
 if [ $# -ne 3 ] && [ $# -ne 0 ]; then
-    echo "参数不正确，请输入正确的参数"
+    echo "参数不正确，请输入正确的参数(wrong argument, please try again)"
     exit 1
 fi
 
 if [ $# -eq 3 ] && [ "$3" -ne "$2" ]; then
-    echo "两次输入密码不一致，请重新输入"
+    echo "两次输入密码不一致，请重新输入(password mismatch, please try again)"
     exit 1
 fi
 
