@@ -29,3 +29,15 @@ arch-chroot /mnt /opt/configure.sh yourusrname yourpasswd yourpasswd
 ```
 
 **`install.sh`脚本会下载并运行`configure.sh`，如果希望在运行之前进行设置，请调用无参的`install.sh`，并手动下载编辑运行`configure.sh`。**
+
+## ubuntu_vps_config.sh
+
+该脚本用来配置新创建的运行ubuntu 18.04系统的VPS，并假设你使用了root权限以远程SSH方式登录了系统。
+
+使用方法：
+
+```bash
+
+wget https://raw.githubusercontent.com/techstay/myscripts/master/ubuntu_vps_config.sh
+bash ubuntu_vps_config.sh
+```
