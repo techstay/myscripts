@@ -26,13 +26,22 @@ passwd "$username"
 echo "$username ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 
 # 为新用户创建zsh配置文件
-curl -L git.io/antigen >/home/"$username"/.antigen.zsh
+if ! cd /home/"$username"; then
+    echo "进入用户目录失败，请检查用户是否创建成功"
+    exit 1
+fi
+curl -L git.io/antigen >.antigen.zsh
+touch .zshrc
+
+# 将文件所有权交给用户
+chown "$username" .antigen.zsh
+chown "$username" .zshrc
+
 cat >/home/"$username"/.zshrc <<EOF
 source .antigen.zsh
 
 antigen use oh-my-zsh
 antigen bundle command-not-found
-antigen bundle autojump
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
