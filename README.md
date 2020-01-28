@@ -40,4 +40,6 @@ arch-chroot /mnt /opt/configure.sh yourusrname yourpasswd yourpasswd
 
 wget https://raw.githubusercontent.com/techstay/myscripts/master/ubuntu_vps_config.sh
 bash ubuntu_vps_config.sh
-```
+```## tampermonkey
+
+我的一些油猴脚本。直接在[GreasyFork](https://greasyfork.org/zh-CN)搜索即可。
