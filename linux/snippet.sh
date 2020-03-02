@@ -20,6 +20,14 @@ sudo pacman -Syu
 # 设置pacman彩色输出
 sudo sed -i 's/^#Color/Color/g' /etc/pacman.conf
 
+# 配置中文输入法
+sudo pacman -S fcitx-sunpinyin fcitx-libpinyin fcitx-rime fcitx-googlepinyin fcitx-cloudpinyin fcitx-table-extra fcitx-table-other fcitx-configtool
+tee ~/.pam_environment <<EOL
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+EOL
+
 #                          _____ _    _  _____ ______
 #                         / ____| |  | |/ ____|  ____|
 #   ___  _ __   ___ _ __ | (___ | |  | | (___ | |__
