@@ -120,7 +120,7 @@ EOF
 
 # 配置podman
 sudo touch /etc/sub{uid,gid}
-sudo usermod -w 10000-65535 -v 10000-65535 "$USER"
+sudo usermod -w 10000-75535 -v 10000-75535 $(whoami)
 
 # 设置docker镜像源
 sudo tee /etc/docker/daemon.json <<EOL
