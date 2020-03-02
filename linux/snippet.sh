@@ -1,10 +1,47 @@
 #! /bin/bash
 
+#                    _                __  __             _
+#     /\            | |       ___    |  \/  |           (_)
+#    /  \   _ __ ___| |__    ( _ )   | \  / | __ _ _ __  _  __ _ _ __ ___
+#   / /\ \ | '__/ __| '_ \   / _ \/\ | |\/| |/ _` | '_ \| |/ _` | '__/ _ \
+#  / ____ \| | | (__| | | | | (_>  < | |  | | (_| | | | | | (_| | | | (_) |
+# /_/    \_\_|  \___|_| |_|  \___/\/ |_|  |_|\__,_|_| |_| |\__,_|_|  \___/
+#                                                      _/ |
+#                                                     |__/
+
+# 添加Manjaro镜像源
+sudo pacman-mirrors -c China
+sudo pacman -Syu
+
+# 添加Arch镜像源
+sudo sed -i '1i Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch' /etc/pacman.d/mirrorlist
+sudo pacman -Syu
+
+# 设置pacman彩色输出
+sudo sed -i 's/^#Color/Color/g' /etc/pacman.conf
+
+#                          _____ _    _  _____ ______
+#                         / ____| |  | |/ ____|  ____|
+#   ___  _ __   ___ _ __ | (___ | |  | | (___ | |__
+#  / _ \| '_ \ / _ \ '_ \ \___ \| |  | |\___ \|  __|
+# | (_) | |_) |  __/ | | |____) | |__| |____) | |____
+#  \___/| .__/ \___|_| |_|_____/ \____/|_____/|______|
+#       | |
+#       |_|
+
 # 添加openSUSE Tumbleweed镜像源
 sudo zypper addrepo -f http://mirrors.aliyun.com/opensuse/tumbleweed/repo/oss/ oss
 sudo zypper addrepo -f http://mirrors.aliyun.com/opensuse/tumbleweed/repo/non-oss/ nonoss
 sudo zypper addrepo -f http://mirrors.aliyun.com/packman/openSUSE_Tumbleweed Packman
 sudo zypper update
+
+#   __         _
+#  / _|       | |
+# | |_ ___  __| | ___  _ __ __ _
+# |  _/ _ \/ _` |/ _ \| '__/ _` |
+# | ||  __/ (_| | (_) | | | (_| |
+# |_| \___|\__,_|\___/|_|  \__,_|
+#
 
 # Fedora镜像源
 sudo cp /etc/yum.repos.d/fedora.repo{,.backup}
@@ -34,6 +71,15 @@ EOL
 
 sudo dnf update
 
+#                      _     _
+#                     | |   (_)
+#  _ __ __ _ ___ _ __ | |__  _  __ _ _ __
+# | '__/ _` / __| '_ \| '_ \| |/ _` | '_ \
+# | | | (_| \__ \ |_) | |_) | | (_| | | | |
+# |_|  \__,_|___/ .__/|_.__/|_|\__,_|_| |_|
+#               | |
+#               |_|
+
 # 配置Raspbian镜像源
 sudo cp /etc/apt/sources.list{,.backup}
 sudo tee /etc/apt/sources.list <<EOL
@@ -45,6 +91,14 @@ sudo cp /etc/apt/sources.list.d/raspi.list{,.backup}
 sudo tee /etc/apt/sources.list.d/raspi.list <<EOL
 deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
 EOL
+
+#                  _        _
+#                 | |      (_)
+#   ___ ___  _ __ | |_ __ _ _ _ __   ___ _ __
+#  / __/ _ \| '_ \| __/ _` | | '_ \ / _ \ '__|
+# | (_| (_) | | | | || (_| | | | | |  __/ |
+#  \___\___/|_| |_|\__\__,_|_|_| |_|\___|_|
+#
 
 # 设置Podman镜像源
 sudo cp /etc/containers/registries.conf{,.bak}
@@ -69,6 +123,14 @@ sudo tee /etc/docker/daemon.json <<EOL
     ]
 }
 EOL
+
+#            _
+#           (_)
+#  _ __ ___  _ ___  ___
+# | '_ ` _ \| / __|/ __|
+# | | | | | | \__ \ (__
+# |_| |_| |_|_|___/\___|
+#
 
 # 设置时区
 sudo sed -i 's/^# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/g' /etc/locale.gen
